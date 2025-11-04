@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>Chatty</title>
+</head>
+
+<body>
+    <header id="titlebar" role="banner">
+        <div class="brand">
+            <h1>Chatty</h1>
+        </div>
+        <p class="tag">Simple LLM inference</p>
+    </header>
+
+    <main class="container" role="main">
+        <section class="chat-card" id="chatCard">
+            <ol class="messages" id="messages" aria-live="polite">
+                <li class="message meta">Ask me something...</li>
+            </ol>
+
+            <form id="composer" class="composer" action="javascript:void(0);" aria-label="Send a message">
+                <input id="input" class="input" type="text" placeholder="Type a message..." autocomplete="off">
+                <button id="sendBtn" class="btn" type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <small title="get me out of here">Made in the USA</small>
+    </footer> 
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
