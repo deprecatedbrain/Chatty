@@ -36,6 +36,7 @@ def load_llama_model(llama_bin: str, mmj_path: str):
         return False
 
     model_path = data.get('files', {}).get('gguf')
+    mmproj_path = data.get('files', {}).get('mmproj')
 
     if not model_path:
         print('Provided .mmj does not have a valid model path!')
@@ -56,6 +57,20 @@ def load_llama_model(llama_bin: str, mmj_path: str):
         "-m", model_path_str,
         "--port", str(LLAMA_PORT),
     ]
+
+    # Add mmproj if available
+    if mmproj_path:
+        mmproj_path_p = Path(mmproj_path)
+        if not mmproj_path_p.is_absolute():
+            mmproj_path_p = (mmj_path_p.parent / mmproj_path_p).resolve(strict=False)
+        else:
+            mmproj_path_p = mmproj_path_p.resolve(strict=False)
+        
+        if mmproj_path_p.exists():
+            print("Adding vision mmproj:", str(mmproj_path_p))
+            cmd.extend(["--mmproj", str(mmproj_path_p)])
+        else:
+            print("Warning: mmproj file not found:", str(mmproj_path_p))
 
     print("starting llama-server:", " ".join(cmd))
     # start_new_session=True makes the process a session leader so we can kill its process group
